@@ -614,11 +614,6 @@ a {
     margin: 0 auto;
     overflow: hidden;
 }
-.mask-group {
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-}
 
 .union {
     position: absolute;
@@ -636,13 +631,13 @@ a {
     align-items: flex-start;
     justify-content: center;
     position: relative;
-    overflow: hidden;
     transform: scale(1);
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: auto;
+    overflow: hidden;
 }
 
-.arch:hover {
-    transform: scale(1.1);
+.link:hover ~ .arch .project-image {
+    transform: scale(1.05);
 }
 
 .project-image {
@@ -653,21 +648,15 @@ a {
     width: auto;
     object-fit: cover;
     width: auto;
+    transform: scale(1);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 #padding-adjust{
     padding-left: 7%;
     justify-content: flex-start;
 }
-.project-image-3 {
-    position: absolute;
-    top: -1px;
-    left: -50%;
-    height: 100%;
-    width: auto;
-    object-fit: cover;
-    width: auto;
-}
+
 .arch-no-line {
     position: relative;
     width: auto;
@@ -686,13 +675,32 @@ a {
     justify-content: space-between;
     height: 60vh;
     z-index: 1;
+    
+}
+@keyframes right-left {
+    0%{
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 .p {
     position: relative;
     margin-top: -1.00px;
     color: var(--variable-collection-text-color);
+    animation: right-left 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
 }
-
+#canvas-1{
+    animation: small-y-animation 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation-delay: 1s;
+    opacity: 0;
+    
+}
 .slide {
     display: flex;
     position: relative;
@@ -708,6 +716,7 @@ a {
     z-index: 6;
     top: 0;
     left: 0;
+    pointer-events: auto;
 }
 .project-info {
     display: inline-flex;
@@ -730,6 +739,17 @@ a {
     align-items: flex-start;
     position: relative;
     flex: 0 0 auto;
+    animation: left-right-animation 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+@keyframes left-right-animation {
+    0%{
+        transform: translateX(-40px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 .text-wrapper-1 {
     position: relative;
@@ -756,6 +776,9 @@ a {
     width: fit-content;
     flex: 0 0 auto;
     z-index: 1;
+    animation: left-right-animation 2.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation-delay: 0.5s;
+    opacity: 0;
 }
 .text-wrapper-3 {
     position: relative;
