@@ -1,0 +1,124 @@
+:root {
+    --body-font-family: "Afacad", serif;
+    --body-font-weight: 400;
+    --body-font-size: 1rem;
+    --body-letter-spacing: 0px;
+    --body-line-height: normal;
+    --body-font-style: normal;
+    --h3-font-family: "Abhaya Libre", serif;
+    --h3-font-weight: 400;
+    --h3-font-size: 3.5rem;
+    --h3-letter-spacing: 0px;
+    --h3-line-height: normal;
+    --h3-font-style: normal;
+    --h2-font-family: "Abhaya Libre", serif;
+    --h2-font-weight: 600;
+    --h2-font-size: 3.7rem;
+    --h2-letter-spacing: 0px;
+    --h2-line-height: normal;
+    --h2-font-style: normal;
+    --phone-body-font-family: "Afacad", serif;
+    --phone-body-font-weight: 400;
+    --phone-body-font-size: 16px;
+    --phone-body-letter-spacing: 0px;
+    --phone-body-line-height: normal;
+    --phone-body-font-style: normal;
+    --phone-h3-font-family: "Abhaya Libre", serif;
+    --phone-h3-font-weight: 400;
+    --phone-h3-font-size: 25px;
+    --phone-h3-letter-spacing: 0px;
+    --phone-h3-line-height: normal;
+    --phone-h3-font-style: normal;
+    --phone-h2-font-family:  "Abhaya Libre", serif;
+    --phone-h2-font-weight: 400;
+    --phone-h2-font-size: 30px;
+    --phone-h2-letter-spacing: 0px;
+    --phone-h2-line-height: normal;
+    --phone-h2-font-style: normal;
+    --phone-h4-bold-font-family:  "Abhaya Libre", serif;
+    --phone-h4-bold-font-weight: 700;
+    --phone-h4-bold-font-size: 20px;
+    --phone-h4-bold-letter-spacing: 0px;
+    --phone-h4-bold-line-height: normal;
+    --phone-h4-bold-font-style: normal;
+    --h1-font-family: "Abhaya Libre", serif;
+    --h1-font-weight: 600;
+    --h1-font-size: 9.5rem;
+    --h1-letter-spacing: 0px;
+    --h1-line-height: normal;
+    --h1-font-style: normal;
+    --heading-font-family: "Abhaya Libre", serif;
+    --heading-font-weight: 700;
+    --heading-font-size: 18vw;
+    --heading-margin-block-end: 0;
+    --heading-letter-spacing: 0px;
+    --heading-line-height: normal;
+    --heading-font-style: normal;
+    --phone-h1-font-family: "Abhaya Libre", serif;
+    --phone-h1-font-weight: 400;
+    --phone-h1-font-size: 45px;
+    --phone-h1-letter-spacing: 0px;
+    --phone-h1-line-height: normal;
+    --phone-h1-font-style: normal;
+    --h4-font-family: "Abhaya Libre", serif;
+    --h4-font-weight: 700;
+    --h4-font-size: 1.3rem;
+    --h4-letter-spacing: 0px;
+    --h4-line-height: normal;
+    --h4-font-style: normal;
+    --variable-collection-text-color: rgba(247, 241, 234, 1);
+    --variable-collection-sub-color: rgba(137, 137, 137, 1);
+    --variable-collection-sub-2-color: rgba(87, 87, 87, 0.9);
+    --variable-collection-bg-color: rgba(0, 0, 0, 1);
+    --variable-collection-black-fileter-color: rgba(0, 0, 0, 0.2);
+}
+
+.h1 {
+    font-size: var(--h1-font-size);
+    font-family: var(--h1-font-family);
+    font-weight: var(--h1-font-weight);
+    font-style: var(--h1-font-style);
+    letter-spacing: var(--h1-letter-spacing);
+    line-height: var(--h1-line-height);
+}
+
+.h2{
+    font-family: var(--h2-font-family);
+    font-size: var(--h2-font-size);
+    font-weight: var(--h2-font-weight);
+    font-style: var(--h2-font-style);
+    line-height: var(--h2-line-height);
+    letter-spacing: var(--h2-letter-spacing);
+}
+.h3{
+    font-family: var(--h3-font-family);
+    font-size: var(--h3-font-size);
+    font-weight: var(--h3-font-weight);
+    font-style: var(--h3-font-style);
+    line-height: var(--h3-line-height);
+    letter-spacing: var(--phone-h3-letter-spacing);
+}
+.h4{
+    font-family: var(--h4-font-family);
+    font-size: var(--h4-font-size);
+    font-style: var(--h4-font-style);
+    font-weight: var(--h4-font-weight);
+    line-height: var(--h4-line-height);
+    letter-spacing: var(--h4-letter-spacing);
+}
+.body{
+    font-family: var(--body-font-family);
+    font-size: var(--body-font-size);
+    font-weight: var(--body-font-weight);
+    font-style: var(--body-font-style);
+    line-height: var(--body-line-height);
+    letter-spacing: var(--body-letter-spacing);
+}
+.heading{
+    font-family: var(--heading-font-family);
+    font-size: var(--heading-font-size);
+    font-weight: var(--heading-font-weight);
+    font-style: var(--heading-font-style);
+    letter-spacing: var(--heading-letter-spacing);
+    line-height: var(--heading-line-height);
+}

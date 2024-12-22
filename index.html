@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Evelyn's porfolio</title>
+        <link rel="stylesheet" href="styleguide.css" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Afacad:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    </head>
+    <body id="body">
+        <div class="camera">
+            <div class="horizontal-move-container" id="container">
+                <div class="landing-page">
+                    <div class="my">
+                        <div class="M body">M</div>
+                        <img class="line" src="image/Line 1.svg" />
+                        <div class="Y body">Y</div>
+                    </div>
+                    <div class="vietnam body">V<br />i<br />e<br />t<br /><br />N<br />a<br />m</div>
+                    <img class="v" src="image/V.svg" />
+                    <img class="e" src="image/E.svg" />
+                    <img class="e2" src="image/E-2.svg" />
+                    <img class="l" src="image/L.svg" />
+                    <img class="y" src="image/Y.svg" />
+                    <img class="n" src="image/N.svg" />
+                    <div class="hi-my-name-is body">Hi!!<br />My <br />name<br />is</div>
+                </div>
+                <div class="job-page">
+                    <div class="job-title">
+                        <div class="job h3">UI/UX DESIGNER</div>
+                        <div class="job h3">FRONT-END DEVELOPER</div>
+                        <div class="job h3">WEBFLOW DEVELOPER</div>
+                    </div>
+                    <p class="job-description body">
+                        I thrive on bringing visionary ideas to life by crafting dynamic websites and apps that seamlessly address the
+                        unique pain points of users and businesses. Transforming creativity into impactful, functional solutions is my
+                        passion.
+                    </p>
+                </div>
+                <svg id="svgCanvas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                            <polygon points="0,0 10,5 0,10" fill="#f7f1ea" />
+                        </marker>
+                    </defs>
+                
+                    <!-- Draw a line with an arrow -->
+                    <line id="arrowLine" x1="10%" y1="67%" x2="25%" y2="67%" stroke="#f7f1ea" stroke-width="0.3" marker-end="url(#arrow)" />
+                    <circle id="circle" cx="25%" cy="67%" r="4%" stroke="#f7f1ea" fill="transparent" stroke-width="0.3" />
+                </svg>
+            </div>
+            <div class="navbar">
+                <a class="logo-container" href="index.html">
+                    <img src="image/logo.png" alt="Logo" class="logo">
+                </a>
+                <div class="info">
+                    <a class="about body" href="about.html">About</a>
+                    <a class="work body" href="#work">Work</a>
+                </div>
+                <a class="contact black-text body" href="#contact">Contact</a>
+            </div>
+        </div>
+        <div class="project-page" id="work">
+            <div class="title">
+                <div class="ellipse"></div>
+                <div class="projects h3">PROJECTS</div>
+            </div>
+            <div class="project-container-with-arrow">
+                <button class="prev-arrow">
+                    <img id="prev" src="image/prev arrow.svg" />
+                </button>
+                <div class="slider">
+                    <div class="slide">
+                        
+                        <div class="project-info">
+                            <div class="left-info">
+                                <div class="small-title">
+                                    <div class="text-wrapper-1 body">UI design</div>
+                                    <div class="text-wrapper-2 body">2024</div>
+                                </div>
+                                <div class="large-title">
+                                    <div class="text-wrapper-3 h2">Call of</div>
+                                    <div class="text-wrapper-4 h2">the Abyss</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-info">
+                            <div class="project-info">
+                                <a href="CallOfTHeAbyss.html" class="link">
+                                </a>
+                                <img class="union" src="image/Union.svg" />
+                                <div class="arch">
+                                    <img class="project-image" src="image/call-of-the-abyss-masked.png" /> 
+                                    <img class="arch-no-line" src="image/arch-no-line.svg" />
+                                </div>
+                            </div>
+                            <div class="p-container">
+                                <canvas id="canvas-1" width="140" height="140"></canvas>
+                                <p class="p body">Get to know the wonderful concert took place under the abyss by this gorgeous website.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="project-info">
+                            <div class="left-info">
+                                <div class="small-title">
+                                    <div class="text-wrapper-1 body">UI design</div>
+                                    <div class="text-wrapper-2 body">2024</div>
+                                </div>
+                                <div class="large-title">
+                                    <div class="text-wrapper-3 h2">Chicky</div>
+                                    <div class="text-wrapper-4 h2">Wacky</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-info special">
+                            <div class="project-info">
+                                <a href="ChickyWacky.html" class="link">
+                                    <div class="animation"></div>
+                                </a>
+                                <img class="union" src="image/Union.svg" />
+                                <div class="arch">
+                                    <img class="project-image" src="image/chicky-wacky-masked.png" /> 
+                                    <img class="arch-no-line" src="image/arch-no-line.svg" />
+                                </div>
+                            </div>
+                            <div class="p-container">
+                                <canvas id="canvas-2" width="140" height="140"></canvas>
+                                <p class="p body">Let's explore 7 steps to build up a farm through an interesting beautiful infographic.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide" id="padding-adjust">
+                        <div class="project-info">
+                            <div class="left-info">
+                                <div class="small-title">
+                                    <div class="text-wrapper-1 body">HTML CSS Javascript</div>
+                                    <div class="text-wrapper-2 body">2024</div>
+                                </div>
+                                <div class="large-title">
+                                    <div class="text-wrapper-3 h2">The</div>
+                                    <div class="text-wrapper-4 h2">Rose</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right-info special">
+                            <div class="project-info">
+                                <a href="TheRose.html" class="link"></a>
+                                <img class="union" src="image/Union.svg" />
+                                <div class="arch">
+                                    <img class="project-image-3" src="image/the-rose-masked.png" />
+                                    <img class="arch-no-line" src="image/arch-no-line.svg" />
+                                </div>
+                            </div>
+                            <div class="p-container">
+                                <canvas id="canvas-3" width="140" height="140"></canvas>
+                                <p class="p body">Let's explore the journey of love through "The Rose" - an interactive web-based poetry.</p>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+                <button class=" next-arrow">
+                    <img id="next" src="image/next arrow.svg" />
+                </button>
+                
+            </div>
+        </div>
+        <div class="footer" id="contact">
+            <div class="divider"></div>
+            <div class="contact-wrapper">
+                <div class="info-contact" id="left">
+                    <div class="top"> 
+                        <a class="logo-footer-container" href="index.html">
+                            <img src="image/logo.png" alt="Logo" class="logo-footer">
+                        </a>
+                        <div class="name h4">EVELYN TRUONG</div>
+                    </div>
+                    <p class="message body">Let’s do something amazing together</p>
+                </div>
+                <div class="info-contact" id = "middle">
+                    <a class="navtext h4" href="index.html">Home</a>
+                    <a class="navtext h4" href="about.html">About</a>
+                    <a class="navtext h4" href="#contact">Contact</a>
+                    <a class="navtext h4" href="index.html#work">Work</a>
+                    
+                </div>
+                <div class="info-contact" id="right">
+                    <div class="social-media">
+                        <a href="https://www.instagram.com/" target="_blank" class="instagram-container">
+                            <img class="instagram" src="image/instagram.svg" />
+                        </a>
+                        <a href="https://www.linkedin.com/feed/" target="_blank" class="linkedin-container">
+                            <img class="linkedin" src="image/linkedin-logo.svg" />
+                        </a>
+                        <a href="https://www.facebook.com/truong.my.566148" target="_blank" class="facebook-container">
+                            <img class="facebook" src="image/facebook-logo.svg" />
+                        </a>
+                    </div>
+                    <a href="mailto:tmy84422@gmail.com" target="_blank" rel="noopener noreferrer"
+                        ><div class="contact-group h4">tmy84422@gmail.com</div></a
+                    >
+                    <div class=" contact-group h4">+84 89 869 3043</div>
+                </div>
+            </div>
+            <div class="contact-me heading">CONTACT ME</div>
+        </div>
+        <script src="script.js"></script>    
+    </body>
+</html>
+
+
+
+
+
