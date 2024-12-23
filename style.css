@@ -164,7 +164,6 @@ a {
     top: 45%;
     left: 6%;
     object-fit: cover;
-    transform: scale(0.6);
     opacity: 0;
     animation: e-animation 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
     animation-delay: 3s;
@@ -193,9 +192,9 @@ a {
     width: fit-content;
     height: fit-content;
     top: 75%;
-    left: 33%;
+    left: 35%;
     object-fit: cover;
-    transform: scale(0.6);
+    
     opacity: 0;
     animation: e2-animation 3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
     animation-delay: 3s;
@@ -228,7 +227,7 @@ a {
     width: fit-content;
     height: auto;
     top: 33%;
-    right: 42%;
+    right: 38%;
     object-fit: cover;
     transform: scale(0.6);
     opacity: 0;
@@ -262,7 +261,7 @@ a {
     width: fit-content;
     height: auto;
     top: 12%;
-    left: 67%;
+    left: 65%;
     object-fit: cover;
     transform: scale(0.6);
     opacity: 0;
@@ -345,10 +344,21 @@ a {
     top: 0;
     z-index: 100;
     animation: m-animation 1s ease forwards;
-    animation-delay: 8s;
     opacity: 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.blur-zone {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5% 5%;
+    z-index: 1001;
+    pointer-events: none;
 }
 
+  
 
 .logo-container {
     position: relative;
@@ -372,13 +382,68 @@ a {
 .work {
     position: relative;
     color: var(--variable-collection-text-color);
+    cursor: pointer;
+    display: inline-block;
+    height: fit-content;
+}
+.work::before,
+.work::after {
+    content: '';
+    position: absolute;
+    top: 25px; /* Adjust distance from text */
+    width: 0;
+    height: 0.5px; /* Thickness of the line */
+    background-color: var(--variable-collection-text-color); /* Color of the line */
+    transition: width 0.3s ease-in-out; /* Smooth animation */
+}
+  
+.work::after {
+    top: 30px;
+    left: 25%; /* Second line positioned further */
+}
+  
+.work:hover::before {
+    width: 100%; /* First line grows to full width */
+}
+  
+.work:hover::after {
+    width: 50%; /* Second line grows to half the width */
+    left: 25%; /* Center the second line */
 }
 
 .about {
     position: relative;
     color: var(--variable-collection-text-color);
+    cursor: pointer;
+    display: inline-block;
+    height: fit-content;
 }
-
+.about::before,
+.about::after {
+    content: '';
+    position: absolute;
+    top: 25px; /* Adjust distance from text */
+    width: 0;
+    height: 0.5px; /* Thickness of the line */
+    background-color: var(--variable-collection-text-color); /* Color of the line */
+    transition: width 0.3s ease-in-out; /* Smooth animation */
+}
+  
+.about::after {
+    top: 30px;
+    left: 25%; /* Second line positioned further */
+}
+  
+.about:hover::before {
+    width: 100%; /* First line grows to full width */
+}
+  
+.about:hover::after {
+    width: 50%; /* Second line grows to half the width */
+    left: 25%; /* Center the second line */
+}
+  
+  
 .contact {
     position: relative;
     height: fit-content;
@@ -386,6 +451,13 @@ a {
     padding: 0.2% 1.5%;
     background-color: var(--variable-collection-text-color);
     border-radius: 50px 50px;
+    box-shadow: none;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+.contact:hover{
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    transform: scale(1.05);
 }
 .job-page {
     position: relative;
@@ -525,12 +597,15 @@ a {
     position: relative;
     width: fit-content;
     color: var(--variable-collection-text-color);
+    text-align: center;
+
 }
 
 .message {
     position: relative;
     width: fit-content;
     color: var(--variable-collection-text-color);
+    text-align: center;
 }
 
 #right {
@@ -555,6 +630,7 @@ a {
     gap: 25px;
     position: relative;
     flex: 0 0 auto;
+    align-items: center;
 }
 
 #middle{
@@ -575,6 +651,14 @@ a {
     width: fit-content;
     height: auto;
     transform: scale(0.9);
+}
+.instagram-container{
+    width: fit-content;
+    height: auto;
+    transform: scale(1.05);
+}
+.email{
+    display: none;
 }
 .project-page{
     background-color: var(--variable-collection-bg-color);
@@ -633,6 +717,7 @@ a {
     position: relative;
     transform: scale(1);
     pointer-events: auto;
+    transition: transform 2s cubic-bezier(0.075, 0.82, 0.165, 1);
     overflow: hidden;
 }
 
@@ -695,19 +780,21 @@ a {
     animation-delay: 0.5s;
     opacity: 0;
 }
-#canvas-1{
+#canvas-1, #canvas-2, #canvas-3 {
     animation: small-y-animation 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
     animation-delay: 1s;
     opacity: 0;
-    
 }
 .slide {
     display: flex;
     position: relative;
     align-items: flex-start;
     justify-content: center;
-    padding-bottom: 2%;
+    padding: 2% 0;
     width: 100vw;
+    height: fit-content;
+    z-index: 0;
+    overflow: visible;
 }
 .link{
     position: absolute;
@@ -722,7 +809,7 @@ a {
     display: inline-flex;
     align-items: center;
     position: relative;
-    height: fit-content;
+    width: fit-content;
 }
 .left-info{
     display: flex;
@@ -751,21 +838,41 @@ a {
         opacity: 1;
     }
 }
+.reset-animation {
+    animation: none !important; /* Force removal of animations */
+}
+
+.link:active ~ .arch {
+    transform: scale(1.2);
+}
+
+.p-container, #canvas-1 {
+    transition: transform 1.5s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 1.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.p-container.move-right, #canvas-1.move-right {
+    transform: translateX(100px);
+    opacity: 0;
+}
+
+.small-title, .large-title {
+    transition: transform 1.5s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 1.5s cubic-bezier cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.small-title.move-left, .large-title.move-left {
+    transform: translateX(-100px);
+    opacity: 0;
+}
+
 .text-wrapper-1 {
     position: relative;
-    align-self: stretch;
     margin-top: -1.00px;
+    width: fit-content;
     color: var(--variable-collection-text-color);
 }
 .text-wrapper-2 {
+    width: fit-content;
     position: relative;
     align-self: stretch;
-    color: var(--variable-collection-text-color);
-}
-.text-wrapper-1-update {
-    position: relative;
-    width: fit-content;
-    margin-top: -1.00px;
     color: var(--variable-collection-text-color);
 }
 .large-title {
@@ -777,11 +884,13 @@ a {
     flex: 0 0 auto;
     z-index: 1;
     animation: left-right-animation 2.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     animation-delay: 0.5s;
     opacity: 0;
 }
 .text-wrapper-3 {
     position: relative;
+    width: fit-content;
     align-self: stretch;
     margin-top: -1.00px;
     color: var(--variable-collection-text-color);
@@ -888,12 +997,29 @@ a {
     width: fit-content;
     margin-top: -1.00px;
     color: var(--variable-collection-text-color);
+    animation: left-right-animation 1.5s ease  forwards;
+    opacity: 0;
+    animation-delay: 2s;
 }
 
 .work-name {
     position: relative;
     align-self: stretch;
     color: var(--variable-collection-text-color);
+    animation: work-name-animation 4s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation-delay: 2;
+    opacity: 0;
+}
+@keyframes work-name-animation {
+    0%{
+        opacity: 0;
+        transform: translateY(10vh);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
 }
 
 .intro-image {
@@ -904,8 +1030,10 @@ a {
     position: relative;
     align-self: stretch;
     width: 100%;
+    animation: opacity 3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
-#abyss{
+
+#abyss {
     background-image: url(image/call-of-the-abyss.svg);
 }
 
@@ -1022,7 +1150,16 @@ a {
     width: 2px;
     background-color: var(--variable-collection-text-color);
 }
-
+#top{
+    transition: none;
+    clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+    visibility: hidden;
+}
+#bottom{
+    transition: none;
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    visibility: hidden;
+}
 .text {
     flex-direction: column;
     gap: 10px;
@@ -1082,8 +1219,15 @@ a {
     background-position: center;
     background-size: cover;
     mask-image: radial-gradient(circle, black 55%, transparent 55%);
-    transform: scale(1); /* Default scale */
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth scaling effect */
+    transform: scale(1);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); 
+    pointer-events: auto;
+    opacity: 0.8;
+    
+}
+.circle-slide:hover {
+    transform: scale(1.05) !important;
+    opacity: 1 !important;
 }
 
 #slide-1 {
@@ -1100,12 +1244,9 @@ a {
     background-position: -4% 50%;
 }
 
-#slide-1:hover, #slide-2:hover, #slide-3:hover {
-    transform: scale(1.2); 
-    z-index: 10; 
+.next-project-link {
+    pointer-events: auto;
 }
-
-
 
 
 
@@ -1173,21 +1314,33 @@ a {
 }
 
 .tools img {
-    width: 40px;
-    height: 40px;
-    margin-right: 8px;
+    width: auto;
+    height: 60%;
+}
+#special-tool-image{
+    width: auto;
+    height: 52%;
+}
+#special-2-tool-image{
+    width: auto;
+    height: 70%;
 }
 
-.things span {
-    display: inline-block;
-    margin: 8px 8px 0 0;
-    padding: 8px 12px;
-    border: 2px solid #ffffff;
-    border-radius: 16px;
-    font-size: 14px;
-    white-space: nowrap;
+.tool-container{
+    display: flex;
+    align-items: center;
+    position: relative;
+    align-self: stretch;
+    gap: 3%;
 }
-
+.tool-image-container{
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding:0;
+}
 /* Layout Areas */
 .who-am-i {
     grid-column: 1 / 3; /* Spans two columns */
@@ -1242,14 +1395,25 @@ a {
 .black-text{
     color: var(--variable-collection-bg-color);
 }
-span{
+.pill{
     display: flex;
     padding: 1% 5%;
     border: 1px solid var(--variable-collection-text-color);
     border-radius: 100px;
     width: fit-content;
+    cursor: grab;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
+.pill:active {
+    cursor: grabbing; /* Indicate dragging */
+    transform: scale(1.1); /* Enlarge the pill slightly */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow for effect */
+}
+.dragzone{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
 .self-image-container {
     display: flex;
     flex-direction: column;
@@ -1260,6 +1424,7 @@ span{
     background-color: var(--variable-collection-bg-color);
     flex-wrap: wrap;
     align-content: center;
+    
 }
 
 .image {
@@ -1267,6 +1432,7 @@ span{
     width: 25%;
     height: auto;
     object-fit: cover;
+    visibility: hidden;
 }
 
 .i-strive-for-two {
@@ -1275,6 +1441,7 @@ span{
     align-self: stretch;
     color: var(--variable-collection-text-color);
     text-align: center;
+    opacity: 0;
 }
 
 .massive-about-container{
@@ -1287,5 +1454,485 @@ span{
     position: relative;
     gap: 30vh;
 }
+.massive-about-container .blurred {
+    filter: blur(5px); 
+    transition: filter 0.3s ease-in-out; 
+}
+
+@media (max-width: 992px ) {
+    .y {
+        left: 60%;
+    }
+    .vietnam {
+        left: 40%;
+        top: 35%
+    }
+    .logo{
+        width: 27%;
+    }
+}
 
 
+@media (max-width: 768px ) {
+    
+    @keyframes y-animation {
+        0%{
+            transform: scale(0.6);
+            opacity: 0;
+            top: 45%;
+        }
+        35%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        70%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        100%{
+            transform: scale(0.5);
+            opacity: 1;
+            top: 6%;
+        }
+        
+    }
+    @keyframes e-animation {
+        0%{
+            transform: scale(0.6);
+            opacity: 0;
+            
+        }
+        35%{
+            transform: scale(0.6);
+            opacity: 1;
+           
+        }
+        70%{
+            transform: scale(0.6);
+            opacity: 1;
+        }
+        100%{
+            transform: scale(0.5);
+            opacity: 1;
+        }
+    }
+    @keyframes v-animation {
+        0%{
+            transform: scale(0.6);
+            opacity: 0;
+            top: 45%;
+        }
+        35%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        70%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        100%{
+            transform: scale(0.5);
+            opacity: 1;
+            top: 10%;
+        }
+        
+    }
+    @keyframes e2-animation {
+        0%{
+            transform: scale(0.6);
+            opacity: 0;
+            top: 45%;
+        }
+        35%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        70%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        100%{
+            transform: scale(0.5);
+            opacity: 1;
+            top: 80%;
+        }
+    }
+    @keyframes l-animation {
+        0%{
+            transform: scale(0.6);
+            opacity: 0;
+            top: 45%;
+        }
+        35%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        70%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        100%{
+            transform: scale(0.5);
+            opacity: 1;
+            top: 37%;
+        }
+        
+    }
+    @keyframes n-animation {
+        0%{
+            transform: scale(0.6);
+            opacity: 0;
+            top: 45%;
+        }
+        35%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        70%{
+            transform: scale(0.6);
+            opacity: 1;
+            top: 45%;
+        }
+        100%{
+            transform: scale(0.5);
+            opacity: 1;
+            top: 65%;
+        }
+        
+    }
+    .navbar{
+        padding: 2% 3%;
+    }
+    .vietnam {
+        left: 40%;
+        top: 37%
+    }
+    .my {
+        top: 25%;
+    }
+    .l {
+        left: 50%;
+    }
+    .y {
+        left: 60%;
+    }
+    .logo{
+        width: 25%;
+    }
+    .job-description {
+        width: 40%;
+    }
+    .ellipse {
+        width: 8px;
+        height: 8px;
+    }
+    .arch{
+        height: 50vh;
+        padding: 0 0 2% 0;
+    }
+    .union {
+        height: 50vh;  
+    }
+    .small-title {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       flex-direction: row;
+       gap: 7%;
+       position: relative;
+       width: fit-content;
+    }
+    .text-wrapper-1{
+        width: 7vw;
+    }
+    .large-title {
+        flex-direction: row;
+        gap: 12px;
+    }
+    .text-wrapper-4{
+        padding-left: 0;
+    }
+    .left-info{
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        gap: 4vh;
+        position: relative;
+       align-items: center;
+    }
+    .link:hover ~ .arch .project-image {
+        transform: none;
+    }
+    .right-info{
+        margin-left: 0;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 5vh;
+    }
+    .slide{
+        flex-direction: column;
+        gap: 1vh;
+        padding: 0;
+        align-items: center;
+    }
+    .p-container{
+        margin-left: 0;
+        padding-bottom: 0;
+        height: auto;
+        width: 38vw;
+        flex-direction: column-reverse;
+        gap: 3vh;
+
+    }
+    .project-image{
+        height: 95%;
+        width: auto;
+    }
+    #canvas-1, #canvas-2, #canvas-3 {
+        display: none;
+    }
+    .p{
+        text-align: center;
+    }
+    .union{
+        bottom: 1%;
+        height: 48vh;
+        left: -5%;
+    }
+    .project-page{
+        padding-top: 4vh;
+        gap: 0;
+    }
+    .project-container-with-arrow{
+        margin-top: -15%;
+    }
+    .next-arrow:hover {
+       transform: none;
+    }
+    .prev-arrow:hover {
+        transform: none;
+    }
+    .next-arrow, .prev-arrow{
+        top: 65%;
+    }
+    .contact-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+        padding: 40px 0px 0px;
+        position: relative;
+        flex: 0 0 auto;
+        border: none;
+    }
+    #left{
+        border: none;
+        padding-right: 0;
+        justify-content: center;
+    }
+    #middle{
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        position: relative;
+        align-self: stretch;
+        width: 100%;
+        flex: 0 0 auto;
+
+    }
+
+
+}
+
+@media (max-width: 576px ) {
+    .hi-my-name-is {
+        left: 27%;
+        top: 27%;
+    }
+    .vietnam{
+        top: 60%;
+        left: 45%;
+    }
+    .my{
+        top: 14%;
+        right: 32%;
+    }
+    .line{
+        height: 135px;
+    }
+    .job-description {
+        top: 45%;
+        width: 65%;
+    }
+    .ellipse {
+        width: 5px;
+        height: 5px;
+    }
+    .arch{
+        height: 50vh;
+        padding: 0 0 2% 0;
+
+    }
+    @keyframes e-animation {
+        0%{
+            transform: scale(0.3);
+            opacity: 0;
+            top: 44.5%;
+        }
+        35%{
+            transform: scale(0.3);
+            opacity: 1;
+           top: 44.5%;
+        }
+        70%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 44.5%;
+        }
+        100%{
+            transform: scale(0.4);
+            opacity: 1;
+            top: 5%;
+        }
+        
+    }
+    @keyframes v-animation {
+        0%{
+            transform: scale(0.3);
+            opacity: 0;
+            top: 45%;
+        }
+        35%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 45%;
+
+        }
+        70%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 45%;
+            Left: 20%;
+        }
+        100%{
+            transform: scale(0.4);
+            opacity: 1;
+            top: 15%;
+            Left: 35%;
+        }
+        
+    }
+    @keyframes e2-animation {
+        0%{
+            transform: scale(0.3);
+            opacity: 0;
+            top: 45%;
+        }
+        35%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 45%;
+        }
+        70%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 45%;
+            left: 35%;
+        }
+        100%{
+            transform: scale(0.4);
+            opacity: 1;
+            top: 27%;
+            left: 70%;
+        }
+        
+    }
+    @keyframes l-animation {
+        0%{
+            transform: scale(0.3);
+            opacity: 0;
+            top: 45%;
+        }
+        35%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 45%;
+        }
+        70%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 45%;
+            left: 50%;
+        }
+        100%{
+            transform: scale(0.4);
+            opacity: 1;
+            top: 43%;
+            left: 10%;
+        }
+    }
+    @keyframes y-animation {
+        0%{
+            transform: scale(0.3);
+            opacity: 0;
+            top: 44.5%;
+            left: 56%;
+        }
+        35%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 44.5%;
+            left: 56%;
+        }
+        70%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 44.5%;
+            left: 56%;
+        }
+        100%{
+            transform: scale(0.4);
+            opacity: 1;
+            top: 56%;
+            left: 60%;
+        }
+        
+    }
+    @keyframes n-animation {
+        0%{
+            transform: scale(0.3);
+            opacity: 0;
+            top: 45%;
+            right: 0;
+        }
+        35%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 45%;
+            right: 0;
+        }
+        70%{
+            transform: scale(0.3);
+            opacity: 1;
+            top: 45%;
+            right: 0;
+        }
+        100%{
+            transform: scale(0.4);
+            opacity: 1;
+            top: 80%;
+            right: 35%;
+        }
+        
+    }
+    
+}
