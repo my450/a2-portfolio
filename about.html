@@ -30,7 +30,7 @@
             <div class="container">
                 <!-- Who am I -->
                 <div class="box who-am-i">
-                    <div class="box-title h4" >Who am I?</div>
+                    <div class="box-title black-text h4" >Who am I?</div>
                     <div class=" black-text body">
                         My name is My (Evelyn) Truong - a UI/UX designer, front-end developer based in Ho Chi Minh City, Viet Nam. 
                         <br><br>
@@ -53,17 +53,18 @@
                 <!-- Tools -->
                 <div class="box tools">
                     <div class="box-title h4">Tools I use</div>
-                    <div>
-                        <img src="image/adobe-ai.svg" alt="AI">
-                        <img src="image/adobe_indesign.svg" alt="ID">
-                        <img src="image/photoshop.svg" alt="PS">
-                        <img src="image/after-effects.svg" alt="AE">
-                        <img src="image/blender.svg" alt="blender">
-                    </div>
-                    <div>
-                        <img src="image/blender.svg" alt="blender">
-                        <img src="image/vscode.svg">
-                        <img src="image/figma.svg" >
+                    <div class="tool-image-container">
+                        <div class="tool-container">
+                            <img src="image/adobe-ai.svg" alt="AI" >
+                            <img src="image/adobe_indesign.svg" alt="ID" id="special-tool-image">
+                            <img src="image/photoshop.svg" alt="PS" >
+                            <img src="image/after-effects.svg" alt="AE" >
+                        </div>
+                        <div class="tool-container">
+                            <img src="image/blender.svg" alt="blender" id="special-2-tool-image">
+                            <img src="image/vscode.svg" class="tool-image">
+                            <img src="image/figma.svg"  class="tool-image">
+                        </div>
                     </div>
                 </div>
         
@@ -88,14 +89,16 @@
                 <!-- Things I Love -->
                 <div class="box things-i-love">
                     <div class="box-title h4">Things I love</div>
-                    <div>
-                        <span class="body">Reading books</span>
-                        <span class="body">Listening to Keshi playlist</span>
-                        <span class="body">Watching Ghibli movies</span>
-                        <span class="body">Drawing</span>
-                        <span class="body">Playing piano</span>
-                        <span class="body">Learning JavaScript</span>
-                        <span class="body">Keep streaks in Duolingo</span>
+                    <div class="dragzone">
+                        <span class="pill body" draggable="true">Drawing</span>
+                        
+                        
+                        <span class="pill body" draggable="true">Watching Ghibli movies</span>
+                        <span class="pill body" draggable="true">Learning JavaScript</span>
+                        <span class="pill body" draggable="true">Keep streaks in Duolingo</span>
+                        <span class="pill body" draggable="true">Playing piano</span>
+                        <span class="pill body" draggable="true">Listening to Keshi playlist</span>
+                        
                     </div>
                 </div>
             </div>
@@ -146,5 +149,6 @@
             <div class="contact-me heading">CONTACT ME</div>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
