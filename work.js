@@ -1,11 +1,12 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     const slider = document.querySelector('.slider-2');
     const slides = document.querySelectorAll('.circle-slide');
     const prevArrow = document.querySelector('.prev-arrow');
     const nextArrow = document.querySelector('.next-arrow');
-    const textWrapper8 = document.querySelector('.text-wrapper-8'); // Select the element to update text
+    const textWrapper8 = document.querySelector('.text-wrapper-8');
+    
 
-    // Mapping of slide IDs to their associated text
     const slideTexts = {
         'slide-1': 'Chicky Wacky',
         'slide-2': 'The Rose',
@@ -13,97 +14,127 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     let currentIndex = 0;
-
+    function isSmallScreen() {
+        return window.innerWidth <= 768;
+    }
     function updateSlider() {
-        const offset = -50 * currentIndex; // Move the slider based on the current index
-        slider.style.transition = 'transform 1s ease-in-out'; // Add smooth transition for the slider movement
+        const offset = -50 * currentIndex;
+        slider.style.transition = 'transform 1s ease-in-out';
         slider.style.transform = `translateX(${offset}%)`;
-        updateText(); // Update text whenever the slider moves
+        updateText();
     }
 
     function updateText() {
         const currentSlide = slides[currentIndex];
         const slideId = currentSlide.id;
-    
-        // Temporarily hide the text for the transition
+
         textWrapper8.classList.add('hidden');
-    
         setTimeout(() => {
-            // Update the text after the fade-out effect
             textWrapper8.textContent = slideTexts[slideId] || '';
-    
-            // Show the text with the fade-in effect
             textWrapper8.classList.remove('hidden');
-        }, 500); // Half of the transition time (fade-out effect duration)
+        }, 500);
     }
-    
 
     function scaleSlides(newIndex) {
-        const currentSlide = slides[currentIndex];
-        const newSlide = slides[newIndex];
-
-        // Scale down the current slide
-        currentSlide.style.transition = 'transform 1s ease';
-        currentSlide.style.transform = 'scale(0.5)';
-
-        // Move the slider to the new index
+        if (isSmallScreen()) {
+            // If screen width is 768px or smaller, avoid scaling effect but still update currentIndex
+            currentIndex = newIndex;
+            updateSlider();
+            return;
+        }
+    
+        // Disable pointer events on all slides
+        slides.forEach(slide => slide.style.pointerEvents = 'none');
+        
+        // Reset scaling of all slides
+        slides.forEach(slide => slide.style.transform = 'scale(0.5)');
+        
+        // Enable pointer events on the new active slide
+        slides[newIndex].style.pointerEvents = 'auto';
+        
+        // Apply scaling to the new active slide
+        slides[newIndex].style.transform = 'scale(1)';
+        
         currentIndex = newIndex;
-
-        // Scale up the new slide
-        newSlide.style.transition = 'transform 1s ease';
-        newSlide.style.transform = 'scale(1)';
     }
+    
 
     function nextSlide() {
-        const newIndex = (currentIndex + 1) % slides.length; // Loop back to the first slide if at the last
+        const newIndex = (currentIndex + 1) % slides.length;
         scaleSlides(newIndex);
         updateSlider();
     }
 
     function prevSlide() {
-        const newIndex = (currentIndex - 1 + slides.length) % slides.length; // Loop back to the last slide if at the first
+        const newIndex = (currentIndex - 1 + slides.length) % slides.length;
         scaleSlides(newIndex);
         updateSlider();
     }
 
-    // Add event listeners to the arrow buttons
     if (nextArrow && prevArrow) {
         nextArrow.addEventListener('click', nextSlide);
         prevArrow.addEventListener('click', prevSlide);
     }
 
-    // Set up IntersectionObserver to scale slides when they are 50% in view
     const observerOptions = {
-        root: null, // Observe in the viewport
-        threshold: 0.5 // Trigger when 50% of the slide is in view
+        root: null,
+        threshold: 0.2,
     };
 
     function handleIntersection(entries) {
         entries.forEach(entry => {
             const slide = entry.target;
             if (entry.isIntersecting) {
-                if (entry.intersectionRatio >= 0.5) {
-                    slide.style.transition = 'transform 0.5s ease';
-                    slide.style.transform = 'scale(1)';
-                }
+                slide.style.transform = 'scale(1)';
             } else {
-                slide.style.transition = 'transform 0.5s ease';
                 slide.style.transform = 'scale(0.5)';
             }
         });
     }
 
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    slides.forEach(slide => observer.observe(slide));
 
-    // Observe each slide
-    slides.forEach(slide => {
-        observer.observe(slide);
-    });
-
-    // Initialize the slider on page load
-    const firstSlide = slides[currentIndex];
-    firstSlide.style.transition = 'transform 0.5s ease';
-    firstSlide.style.transform = 'scale(1)';
-    updateText(); // Update the text for the first slide
-    updateSlider();
+    scaleSlides(currentIndex);
+    updateText();
 });
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const nextProject = document.querySelector('.next-project');
+    const topElement = document.querySelector('#top');
+    const bottomElement = document.querySelector('#bottom');
+
+    const observerOptions = {
+        root: null,
+    };
+
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Trigger opacity and animation for top and bottom elements
+                topElement.style.visibility = 'visible';
+                bottomElement.style.visibility = 'visible';
+
+                // Apply clip-path animations for top and bottom elements
+                topElement.style.animation = 'opacity 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+                bottomElement.style.animation = 'opacity-reverse 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+            
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    if (nextProject) {
+        observer.observe(nextProject);
+    }
+});
+
+
+
+
