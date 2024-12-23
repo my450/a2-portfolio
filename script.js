@@ -118,6 +118,69 @@ document.addEventListener('DOMContentLoaded', function () {
       enableBodyScroll(); // Enable scrolling for vertical sections
       section.scrollIntoView({ behavior: 'smooth' }); // Smoothly scroll to the section
     }
+    
+    let isAnimating = false;
+
+    // Function to animate the arrow
+    function animateArrowToPosition(startX, endX, duration = 0.8) {
+        const startTime = Date.now();
+
+        function updateArrowPosition() {
+            const elapsedTime = Date.now() - startTime;
+            if (elapsedTime < duration * 1000) {
+                const progress = elapsedTime / (duration * 1000);
+                const currentX = startX + progress * (endX - startX);
+                lineArrow.setAttribute('x2', `${currentX}%`);
+                requestAnimationFrame(updateArrowPosition);
+            } else {
+                lineArrow.setAttribute('x2', `${endX}%`); // Ensure final position is set
+            }
+        }
+
+        requestAnimationFrame(updateArrowPosition);
+    }
+
+    // Function to slide to a specific position
+    function slideTo(position, duration = 0.8) {
+        if (isAnimating) return; // Prevent multiple animations at the same time
+        isAnimating = true;
+
+        container.style.transition = `transform ${duration}s ease-in-out`;
+        container.style.transform = `translateX(${position})`;
+
+        if (position === '0px') {
+            // Move arrow back to initial position when sliding to landing-page
+            animateArrowToPosition(80, 25, duration); // Adjust values as per your layout
+        }
+
+        setTimeout(() => {
+            container.style.transition = ''; // Reset transition
+            isAnimating = false;
+        }, duration * 1000); // Convert seconds to milliseconds
+    }
+
+    // Handle the wheel event
+    window.addEventListener('wheel', (event) => {
+        const scrollUp = event.deltaY < 0; // Detect upward scroll
+        const currentScroll = window.scrollY;
+
+        if (scrollUp && !isAnimating) {
+            if (currentScroll === 0 && container.style.transform === 'translateX(-100vw)') {
+                // Scroll up from the job-page to the landing-page
+                slideTo('0px', 2); // Slide to landing-page and move arrow
+                document.body.style.overflowY = 'hidden'; // Disable vertical scrolling
+            }
+        }
+    });
+
+    // Circle click handler to slide to the job-page
+    if (circle) {
+        circle.addEventListener('click', () => {
+            slideTo('-100vw', 2); // Slide to the job-page
+            animateArrowToPosition(25, 80, 0.6); // Move arrow to final position
+            document.body.style.overflowY = 'scroll'; // Enable vertical scrolling
+        });
+    }
 
     // Handle Work navbar link click
     if (workLink) {
@@ -212,6 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
 function drawArcText(ctx, text, centerX, centerY, radius, startAngle, color, fontSize) {
         const chars = text.split('');
         const angleStep = (Math.PI * 2) / chars.length; // Equal angle step for each character
@@ -294,14 +358,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const newSlide = slides[newIndex];
 
         // Scale down the current slide
-        currentSlide.style.transition = 'transform 1s ease';
+        currentSlide.style.transition = 'transform 1s cubic-bezier(0.075, 0.82, 0.165, 1)';
         currentSlide.style.transform = 'scale(0.7)';
 
         // Move the slider to the new index
         currentIndex = newIndex;
 
         // Scale up the new slide
-        newSlide.style.transition = 'transform 1s ease';
+        newSlide.style.transition = 'transform 1s cubic-bezier(0.075, 0.82, 0.165, 1)';
         newSlide.style.transform = 'scale(1)';
     }
 
@@ -344,13 +408,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function handleIntersection(entries) {
         entries.forEach(entry => {
             const slide = entry.target;
-            const texts = slide.querySelectorAll('.small-title, .p, .large-title, #canvas-1, #canvas-2, #canvas-3');
+            const texts = slide.querySelectorAll('.small-title, .p, .large-title');
+            const canvases = slide.querySelectorAll('#canvas-1, #canvas-2, #canvas-3'); // Separate canvases
 
             const largeText = slide.querySelector('.large-title'); // Target large text specifically
             const paragraph = slide.querySelector('.p'); // Target paragraph specifically
 
             if (entry.isIntersecting) {
-                // Restart animations and fade in elements when the slide is in view
+                // Restart animations and fade in text elements when the slide is in view
                 texts.forEach(text => {
                     setTimeout(() => {
                         resetAnimation(text); // Reset and restart animation
@@ -359,22 +424,36 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (paragraph) paragraph.style.opacity = '1'; // Make the paragraph visible
                     }, 0);
                 });
+    
+                // Ensure canvases are visible
+                canvases.forEach(canvas => {
+                    canvas.style.opacity = '1';
+                    canvas.style.transition = 'opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1)';
+                });
             } else {
                 // Pause animations and hide the large text and paragraph when the slide exits the view
                 texts.forEach(text => {
                     text.style.animationPlayState = 'paused';
                 });
+    
                 if (largeText) {
                     largeText.style.opacity = '0'; // Hide the large text
-                    largeText.style.transition = 'opacity 0.5s ease';
+                    largeText.style.transition = 'opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1)';
                 }
+    
                 if (paragraph) {
                     paragraph.style.opacity = '0'; // Hide the paragraph
-                    paragraph.style.transition = 'opacity 0.5s ease';
+                    paragraph.style.transition = 'opacity 1s cubic-bezier(0.075, 0.82, 0.165, 1)';
                 }
+    
+                // Optionally, keep canvases visible even when the slide is not active
+                //canvases.forEach(canvas => {
+                    //canvas.style.opacity = '1'; // Comment this line if you want canvases to hide
+                //});
             }
         });
     }
+
 
     const observer = new IntersectionObserver(handleIntersection, observerOptions);
 
@@ -401,20 +480,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize the slider on page load
     const firstSlide = slides[currentIndex];
-    firstSlide.style.transition = 'transform 0.5s ease';
+    firstSlide.style.transition = 'transform 1s cubic-bezier(0.075, 0.82, 0.165, 1)';
     firstSlide.style.transform = 'scale(1)';
     updateSlider();
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -538,67 +607,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('container');
-    let isHorizontalScrollEnabled = false; // Track horizontal scroll state
-
-    // Enable horizontal scrolling
-    function enableHorizontalScrolling() {
-        document.body.style.overflowX = 'auto';
-        console.log('Horizontal scrolling enabled'); // Debug log
-        isHorizontalScrollEnabled = true;
-    }
-
-    // Disable horizontal scrolling
-    function disableHorizontalScrolling() {
-        document.body.style.overflowX = 'hidden';
-        console.log('Horizontal scrolling disabled'); // Debug log
-        isHorizontalScrollEnabled = false;
-    }
-
-    // Handle scroll events
-    container.addEventListener('scroll', () => {
-        const scrollLeft = container.scrollLeft;
-        const maxScrollLeft = container.scrollWidth - container.clientWidth;
-
-        console.log(`ScrollLeft: ${scrollLeft}, MaxScrollLeft: ${maxScrollLeft}`); // Debug log
-
-        if (scrollLeft >= maxScrollLeft) {
-            container.style.overflowY = 'scroll'; // Enable vertical scrolling
-            console.log('Vertical scrolling enabled'); // Debug log
-        } else if (scrollLeft === 0) {
-            container.style.overflowY = 'hidden'; // Restrict vertical scrolling
-            disableHorizontalScrolling(); // Disable horizontal scrolling
-        }
-    });
-
-    // Handle upward wheel events
-    container.addEventListener('wheel', (event) => {
-        const scrollLeft = container.scrollLeft;
-        console.log(`Wheel event detected: deltaY=${event.deltaY}, scrollLeft=${scrollLeft}`); // Debug log
-
-        if (scrollLeft > 0 && event.deltaY < 0) {
-            enableHorizontalScrolling(); // Enable horizontal scrolling
-            container.scrollBy({
-                left: -30, // Move left
-                behavior: 'smooth',
-            });
-            event.preventDefault(); // Prevent default scrolling
-
-            // Check if we're at the beginning after scrolling
-            setTimeout(() => {
-                if (container.scrollLeft === 0) {
-                    disableHorizontalScrolling();
-                }
-            }, 300);
-        }
-    });
-
-    // Debugging helper: Initial state
-    console.log(`Initial ScrollLeft: ${container.scrollLeft}`);
-});
 
 
 
