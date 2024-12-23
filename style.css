@@ -362,13 +362,13 @@ a {
 
 .logo-container {
     position: relative;
-    width: fit-content;
+    width: 30px;
     height: fit-content;
 }
 
 .logo {
     position: relative;
-    width: 30%;
+    width: 100%;
     height: auto;
 }
 
@@ -655,9 +655,11 @@ a {
 .instagram-container{
     width: fit-content;
     height: auto;
-    transform: scale(1.05);
 }
 .email{
+    display: none;
+}
+.phone{
     display: none;
 }
 .project-page{
@@ -967,6 +969,7 @@ a {
 .massive-container{
     height: auto;
     width: 100vw;
+    background-color: var(--variable-collection-bg-color);
 }
 .intro-page {
     display: flex;
@@ -976,7 +979,6 @@ a {
     height: 100vh;
     gap: 1px;
     position: relative;
-    background-color: var(--variable-collection-bg-color);
     justify-content: flex-end;
 }
 
@@ -1080,14 +1082,13 @@ a {
 
 .project-overview {
     width: 100vw;
-    height: 100vh;
-    background-color: var(--variable-collection-bg-color);
+    height: fit-content;
     display: flex;
     position: relative;
     flex-direction: column;
     gap: 8vh;
     align-items: center;
-    padding-top: 12vh;
+    padding-top: 15vh;
 }
 
 .paragraph{
@@ -1098,13 +1099,16 @@ a {
 
 .showcase{
     width: 100vw;
-    height: 100vh;
-    background-color: var(--variable-collection-bg-color);
+    height: fit-content;
+    padding-top: 15vh;
     gap: 8vh;
     display: flex;
     position: relative;
     flex-direction: column;
     justify-content: center;
+    animation: small-y-animation 2s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    opacity: 0;
+    animation-delay: 4.2s;
 }
 .showcase-container{
     display: flex;
@@ -1128,9 +1132,8 @@ a {
     flex-direction: column;
     align-items: center;
     position: relative;
-    background-color: var(--variable-collection-bg-color);
     width: 100vw;
-    padding-top: 10vh;
+    padding-top: 15vh;
     height: auto;
 }
 
@@ -1203,7 +1206,7 @@ a {
 .slider-container {
     width: 100vw;
     height: auto;
-    overflow: visible; /* Ensure scaling is visible */
+    overflow: hidden; /* Ensure scaling is visible */
 }
 
 .slider-2 {
@@ -1287,7 +1290,7 @@ a {
     grid-template-rows: repeat(3, 1fr);
     gap: 5px;
     width: 85vw;
-    height: 85vh;
+    height: 80vh;
 }
 
 .box {
@@ -1610,7 +1613,7 @@ a {
         
     }
     .navbar{
-        padding: 2% 3%;
+        padding: 2% 5.5% 2% 3.5%;
     }
     .vietnam {
         left: 40%;
@@ -1625,8 +1628,8 @@ a {
     .y {
         left: 60%;
     }
-    .logo{
-        width: 25%;
+    .logo-container{
+        width: 70px;
     }
     .job-description {
         width: 40%;
@@ -1635,13 +1638,7 @@ a {
         width: 8px;
         height: 8px;
     }
-    .arch{
-        height: 50vh;
-        padding: 0 0 2% 0;
-    }
-    .union {
-        height: 50vh;  
-    }
+
     .small-title {
        display: flex;
        align-items: center;
@@ -1652,7 +1649,7 @@ a {
        width: fit-content;
     }
     .text-wrapper-1{
-        width: 7vw;
+        width: 10vw;
     }
     .large-title {
         flex-direction: row;
@@ -1665,7 +1662,7 @@ a {
         display: flex;
         flex-direction: column;
         width: fit-content;
-        gap: 4vh;
+        gap: 5vh;
         position: relative;
        align-items: center;
     }
@@ -1703,17 +1700,18 @@ a {
     .p{
         text-align: center;
     }
+    .arch{
+        height: 45vh;
+        padding: 0 0 2% 0;
+    }
     .union{
         bottom: 1%;
-        height: 48vh;
+        height: 40vh;
         left: -5%;
     }
     .project-page{
-        padding-top: 4vh;
-        gap: 0;
-    }
-    .project-container-with-arrow{
-        margin-top: -15%;
+        padding-top: 10vh;
+        gap: 0px;
     }
     .next-arrow:hover {
        transform: none;
@@ -1722,8 +1720,135 @@ a {
         transform: none;
     }
     .next-arrow, .prev-arrow{
-        top: 65%;
+        width: 6%;
     }
+    .special{
+        margin-left: 0%;
+    }
+    #padding-adjust{
+        padding-left: 0;
+        justify-content: center;
+    }
+    .logo-footer{
+        width:30px ;
+    }
+    #slide-1, #slide-2, #slide-3 {
+        width: 40vw;
+        height: 50vw;
+        opacity: 1;
+    }
+    .prev-arrow img{
+        width: 100%;
+    }
+    .next-arrow img{
+        width: 100%;
+    }
+    .two-video{
+        width: 40%;
+    }
+    .showcase-container{
+        padding-bottom: 2%;
+    }
+    .circle-slide:hover {
+        transform: scale(1) !important;
+        transition: none !important;
+    }
+    .next-project-image button{
+        top: 50%;
+    }
+    .grid-container{
+        gap:0;
+    }
+    .container{
+        width: 90vw;
+        height: 85vh;
+        padding-right: 2.5%;
+    }
+    .image{
+        width: 30%;
+    }
+    .self-image-container{
+        gap: 20px;
+    }
+    .divider{
+        top: 30%;
+    }
+    #chicky-paragraph{
+        width: 65vw;
+    }
+    .contact-me{
+        transform: translate(0%, 42%);
+    }
+}
+
+@media (max-width: 576px ) {
+    #body{
+        overflow-x: hidden;
+    }
+    .navbar{
+        padding: 4% 5% 2% 4%;
+    }
+    .contact{
+        padding: 0.5% 2.5%;
+    }
+    .logo-container{
+        width: 70px;
+    }
+    .info{
+        margin-left: -10%;
+    }
+    .hi-my-name-is {
+        left: 27%;
+        top: 27%;
+    }
+    .vietnam{
+        top: 60%;
+        left: 45%;
+    }
+    .my{
+        top: 14%;
+        right: 32%;
+    }
+    .line{
+        height: 135px;
+    }
+    .job-description {
+        top: 45%;
+        width: 65%;
+    }
+    .project-container-with-arrow{
+        margin-top: -21%;
+    }
+    .ellipse {
+        width: 5px;
+        height: 5px;
+    }
+    .project-page{
+        align-items: start;
+    }
+    .arch{
+        height: 37vh;
+        padding: 0 0 2% 0;
+    }
+    .union{
+        bottom: 1%;
+        height: 35vh;
+        left: -5%;
+    }
+    .right-info .project-info{
+        margin-left: 8%;
+    }
+    .p-container{
+        width: 57vw;
+    }
+    .text-wrapper-1{
+        width: 15vw;
+    }
+    .next-arrow, .prev-arrow{
+        width: 10%;
+        top: 68%;
+    }
+
     .contact-wrapper{
         display: flex;
         flex-direction: column;
@@ -1744,44 +1869,212 @@ a {
         align-items: flex-start;
         gap: 24px;
         position: relative;
-        align-self: stretch;
-        width: 100%;
         flex: 0 0 auto;
+    }
+    #right{
+        display: flex;
+        gap: 15px;
+        flex-direction: row;
+        margin-top: -8%;
+    }
+    .social-media{
+        gap: 15px;
+    }
+    .contact-group{
+        display: none;
+    }
+    .email{
+        display: block;
+        width: 26px;
+    }
+    .phone{
+        display: block;
+        width: 26px;
+    }
+    .footer{
+        height: 50vh;
+    }
+    .intro-page{
+        justify-content: flex-end;
+        padding-top: 20%;
+        height: 30vh;
+    }
+    .work-name{
+        text-align: center;
+    }
+    .work-info-container {
+        display: flex;
+        flex-direction: row-reverse;
+        padding: 0;
+        align-self: normal;
+        gap:0;
+        align-items: flex-start;
+        justify-content: space-around;
+        padding-left: 2%;
+    }
+    .work-info{
+        text-align: right;
+        padding-top: 3%;
+    }
+    .intro-image{
+        height: 80%;
+    }
+    .project-overview{
+        padding-top: 6vh;
+        height: fit-content;
+        gap: 1vh;
+        animation: small-y-animation 2s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+        opacity: 0;
+        animation-delay: 3.2s;
+    }
+    .grid-container{
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+    }
+    .grid-item{
+        display: flex;
+        flex-direction: row;
+        gap: 3%;
+    }
+    .text-wrapper-5{
+        width: 30vw;
+        text-align: right;
+    }
+    .text-wrapper-6{
+        width: 30vw;
+        text-align: left;
+        ;
+    }
+    .grid-container .grid-item:not(:first-child){
+        margin-top: -5%;
+    }
+    .about-project{
+        gap: 2vh;
+    }
+    .paragraph{
+        width: 80vw;
+    }
+    .showcase{
+        padding-top: 6vh;
+        gap: 3vh;
+        justify-content: flex-start;
+        height: fit-content;
 
     }
-
-
-}
-
-@media (max-width: 576px ) {
-    .hi-my-name-is {
-        left: 27%;
-        top: 27%;
+    .line-2{
+        height: 10vh;
     }
-    .vietnam{
-        top: 60%;
-        left: 45%;
+    .next-project{
+        padding-top: 6vh;
+        gap: 2vh;
+        height: fit-content;
     }
-    .my{
-        top: 14%;
-        right: 32%;
+    .next-project-text{
+        gap: 2vh;
     }
-    .line{
-        height: 135px;
+    .divider{
+        width: 70vw;
+        left: 14%;
+        top: 24%;
     }
-    .job-description {
-        top: 45%;
+    .footer{
+        padding-top: 10vh;
+    }
+    .contact-me{
+        transform: translate(0%, 39%);
+    }
+    .one-video{
         width: 65%;
     }
-    .ellipse {
-        width: 5px;
-        height: 5px;
+    .about-container{
+        height: 100vh;
+        padding-top: 8%;
+        gap: 3vh;
+        justify-content: center;
     }
-    .arch{
-        height: 50vh;
-        padding: 0 0 2% 0;
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        gap: 5px;
+        width: 85vw;
+        padding-left: 2%;
+    }
+    .box.blank-2 {
+        display: none;
+        border: none;
+    }
+    .box.blank-1 {
+        display: none;
+        border: none;
+    }
+    .no-title{
+        display: none;
+    }
+    .who-am-i {
+        grid-column: 1 / 3; /* Spans two columns */
+        grid-row: 1/3;
+    }
+    
+    .recognitions {
+        grid-column: 1 / 2; /* Single column */
+        grid-row: 4/5;
+    }
+    
+    .languages {
+        grid-column: 2 / 3; /* Single column */
+        grid-row: 4/5;
+        border-bottom: none;
+    }
+    
+    .tools {
+        grid-column: 1 / 2; /* Single column */
+        grid-row: 3 / 4; /* Spans two rows */
+    }
+    
+    .mission {
+        grid-column: 2 / 3; /* Spans two columns */
+        grid-row: 3/4;
+        border-top: none;
+    }
+    .things-i-love {
+        grid-column: 1 / 3; /* Spans all five columns */
+        grid-row: 5/7;
+    }
+    .self-image-container{
+        gap: 30px;
+        padding-top: 10vh;
+    }
+    .image{
+        width: 60%;
+    }
+    .massive-about-container{
+        gap: 0;
+    }
+    .i-strive-for-two{
+        width: 80vw;
+    }
+    .footer{
+        height: fit-content;
+    }
+    .tools img {
+        width: auto;
+        height: 50%;
+    }
+    #special-tool-image{
+        width: auto;
+        height: 44%;
+    }
+    #special-2-tool-image{
+        width: auto;
+        height: 58%;
+    }
+    .tool-container{
+        gap: 2%;
+    }
 
-    }
+
     @keyframes e-animation {
         0%{
             transform: scale(0.3);
@@ -1791,7 +2084,7 @@ a {
         35%{
             transform: scale(0.3);
             opacity: 1;
-           top: 44.5%;
+            top: 44.5%;
         }
         70%{
             transform: scale(0.3);
@@ -1809,11 +2102,13 @@ a {
         0%{
             transform: scale(0.3);
             opacity: 0;
+            left: 16%;
             top: 45%;
         }
         35%{
             transform: scale(0.3);
             opacity: 1;
+            left: 16%;
             top: 45%;
 
         }
@@ -1821,7 +2116,7 @@ a {
             transform: scale(0.3);
             opacity: 1;
             top: 45%;
-            Left: 20%;
+            Left: 16%;
         }
         100%{
             transform: scale(0.4);
@@ -1835,24 +2130,26 @@ a {
         0%{
             transform: scale(0.3);
             opacity: 0;
+            left: 32%;
             top: 45%;
         }
         35%{
             transform: scale(0.3);
             opacity: 1;
+            left: 32%;
             top: 45%;
         }
         70%{
             transform: scale(0.3);
             opacity: 1;
             top: 45%;
-            left: 35%;
+            left: 32%;
         }
         100%{
             transform: scale(0.4);
             opacity: 1;
-            top: 27%;
-            left: 70%;
+            top: 33%;
+            left: 68%;
         }
         
     }
@@ -1861,17 +2158,20 @@ a {
             transform: scale(0.3);
             opacity: 0;
             top: 45%;
+            left: 45%;
         }
         35%{
             transform: scale(0.3);
             opacity: 1;
             top: 45%;
+            left: 45%;
+
         }
         70%{
             transform: scale(0.3);
             opacity: 1;
             top: 45%;
-            left: 50%;
+            left: 45%;
         }
         100%{
             transform: scale(0.4);
@@ -1885,25 +2185,25 @@ a {
             transform: scale(0.3);
             opacity: 0;
             top: 44.5%;
-            left: 56%;
+            left: 54%;
         }
         35%{
             transform: scale(0.3);
             opacity: 1;
             top: 44.5%;
-            left: 56%;
+            left: 54%;
         }
         70%{
             transform: scale(0.3);
             opacity: 1;
             top: 44.5%;
-            left: 56%;
+            left: 54%;
         }
         100%{
             transform: scale(0.4);
             opacity: 1;
-            top: 56%;
-            left: 60%;
+            top: 60%;
+            left: 54%;
         }
         
     }
@@ -1929,7 +2229,7 @@ a {
         100%{
             transform: scale(0.4);
             opacity: 1;
-            top: 80%;
+            top: 82%;
             right: 35%;
         }
         
