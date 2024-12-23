@@ -9,18 +9,57 @@ document.addEventListener('DOMContentLoaded', function () {
     const contactSection = document.getElementById('contact');
 
     let radiusPercent = 4; // Initial radius of the circle in percentage
-    const minRadiusPercent = 4; // Minimum radius
-    const maxRadiusPercent = 5; // Maximum radius
-    const finalXPercent = 80; // Final x2 value of the arrow when circle is clicked
-    let animatingRadius = true; // Flag to control the radius animation
+    let minRadiusPercent = 4; // Declare as `let` to allow updates
+    let maxRadiusPercent = 5; // Declare as `let` to allow updates
+    let animatingRadius = true;
 
-    // Function to animate the radius of the circle
+    function updateCircleRadiusPercent() {
+        if (window.matchMedia("(max-width: 576px)").matches) {
+            minRadiusPercent = 2; // Smaller radius for mobile
+            maxRadiusPercent = 3;
+        } else if (window.matchMedia("(max-width: 768px)").matches) {
+            minRadiusPercent = 2; // Medium radius for tablets
+            maxRadiusPercent = 3;
+        } else if (window.matchMedia("(max-width: 992px)").matches) {
+            minRadiusPercent = 3; // Larger radius for desktops
+            maxRadiusPercent = 4;
+        } else {
+            minRadiusPercent = 4; // Default radius for larger screens
+            maxRadiusPercent = 5;
+        }
+    }
+    // Initial call to set `minRadiusPercent` and `maxRadiusPercent` based on screen size
+    updateCircleRadiusPercent();
+    const radiusBreakpoints = ["(max-width: 576px)", "(max-width: 768px)", "(max-width: 992px)"];
+    radiusBreakpoints.forEach(breakpoint => {
+    window.matchMedia(breakpoint).addEventListener("change", updateCircleRadiusPercent);
+    }); // Flag to control the radius animation
+
+    let finalXPercent = 80; // Declare `finalXPercent` as `let` to allow updates
+    function updateFinalXPercent() {
+        if (window.matchMedia("(max-width: 576px)").matches) {
+            finalXPercent = 60; // Smaller screen (mobile)
+        } else if (window.matchMedia("(max-width: 768px)").matches) {
+            finalXPercent = 57; // Medium screen (tablet)
+        } else if (window.matchMedia("(max-width: 992px)").matches) {
+            finalXPercent = 60; // Large screen (small desktop)
+        } else {
+            finalXPercent = 80; // Default for larger screens
+        }
+    }
+    // Initial call to set `finalXPercent` based on current screen size
+    updateFinalXPercent();
+    const breakpoints = ["(max-width: 576px)", "(max-width: 768px)", "(max-width: 992px)"];
+    breakpoints.forEach(breakpoint => {
+    window.matchMedia(breakpoint).addEventListener("change", updateFinalXPercent);
+    });
+
     function animateCircleRadius() {
         const duration = 1800; // Full animation duration (increase + decrease)
-
+    
         function updateRadius() {
             if (!animatingRadius) return; // Stop if animation is not active
-
+    
             const elapsedTime = Date.now() % duration; // Loop within duration
             const progress = (elapsedTime / (duration / 2)) % 2; // Loop for half duration
             if (progress < 1) {
@@ -33,11 +72,11 @@ document.addEventListener('DOMContentLoaded', function () {
             circle.setAttribute('r', `${radiusPercent}%`); // Update the radius
             requestAnimationFrame(updateRadius); // Continue animation
         }
-
+    
         requestAnimationFrame(updateRadius); // Start the radius animation
     }
-
-    // Trigger the default radius animation for the circle
+    
+    // Initial call to start the circle animation
     animateCircleRadius();
 
     // On click, stop the radius animation and change the x2 value of the arrow
@@ -125,6 +164,50 @@ document.addEventListener('DOMContentLoaded', function () {
             container.style.overflowY = 'hidden'; // Restrict vertical scrolling
         }
     });
+
+
+    function updateSVGAttributes() {
+        const arrowLine = document.getElementById("arrowLine");
+        const circle = document.getElementById("circle");
+
+        if (window.matchMedia("(max-width: 576px)").matches) {
+            // For screens smaller than 576px
+            arrowLine.setAttribute("x1", "35%");
+            arrowLine.setAttribute("y1", "130%");
+            arrowLine.setAttribute("x2", "40%");
+            arrowLine.setAttribute("y2", "130%");
+            circle.setAttribute("cx", "40%");
+            circle.setAttribute("cy", "130%");
+        } else if (window.matchMedia("(max-width: 768px)").matches) {
+            // For screens between 576px and 768px
+            arrowLine.setAttribute("x1", "20%");
+            arrowLine.setAttribute("y1", "80%");
+            arrowLine.setAttribute("x2", "30%");
+            arrowLine.setAttribute("y2", "80%");
+            circle.setAttribute("cx", "30%");
+            circle.setAttribute("cy", "80%");
+        } else if (window.matchMedia("(max-width: 992px)").matches) {
+            // For screens between 768px and 992px
+            arrowLine.setAttribute("x1", "19%");
+            arrowLine.setAttribute("y1", "72%");
+            arrowLine.setAttribute("x2", "29%");
+            arrowLine.setAttribute("y2", "72%");
+            circle.setAttribute("cx", "29%");
+            circle.setAttribute("cy", "72%");
+        } else {
+            // Default for screens larger than 992px
+            arrowLine.setAttribute("x1", "10%");
+            arrowLine.setAttribute("y1", "67%");
+            arrowLine.setAttribute("x2", "25%");
+            arrowLine.setAttribute("y2", "67%");
+            circle.setAttribute("cx", "25%");
+            circle.setAttribute("cy", "67%");
+        }
+    }
+
+    // Run on page load and when resizing
+    window.addEventListener("resize", updateSVGAttributes);
+    window.addEventListener("DOMContentLoaded", updateSVGAttributes);
   
 });
 
@@ -137,8 +220,7 @@ function drawArcText(ctx, text, centerX, centerY, radius, startAngle, color, fon
   
         ctx.save(); // Save the initial state
         ctx.translate(centerX, centerY); // Move to the center of the canvas
-        ctx.rotate(startAngle); // Rotate to the starting angle
-  
+        ctx.rotate(startAngle); // Rotate to the starting angle 
         chars.forEach((char) => {
           ctx.save(); // Save rotation state
           ctx.translate(0, -radius); // Move up to the radius
@@ -193,92 +275,337 @@ function drawArcText(ctx, text, centerX, centerY, radius, startAngle, color, fon
 animate();
 
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const slider = document.querySelector('.slider');
     const slides = document.querySelectorAll('.slide');
     const prevArrow = document.querySelector('.prev-arrow');
     const nextArrow = document.querySelector('.next-arrow');
-  
+
     let currentIndex = 0;
+
     function updateSlider() {
         const offset = -33 * currentIndex; // Move the slider based on the current index
         slider.style.transition = 'transform 1s ease-in-out'; // Add smooth transition for the slider movement
         slider.style.transform = `translateX(${offset}%)`;
-      }
-    
-      // Scale the current slide down and the new slide up
-      function scaleSlides(newIndex) {
+    }
+
+    function scaleSlides(newIndex) {
         const currentSlide = slides[currentIndex];
         const newSlide = slides[newIndex];
-    
+
         // Scale down the current slide
         currentSlide.style.transition = 'transform 1s ease';
-        currentSlide.style.transform = 'scale(0.7)'; 
-    
+        currentSlide.style.transform = 'scale(0.7)';
+
         // Move the slider to the new index
         currentIndex = newIndex;
-    
+
         // Scale up the new slide
         newSlide.style.transition = 'transform 1s ease';
-        newSlide.style.transform = 'scale(1)'; 
-      }
-    
-      // Go to the next slide
-      function nextSlide() {
+        newSlide.style.transform = 'scale(1)';
+    }
+
+    function nextSlide() {
         const newIndex = (currentIndex + 1) % slides.length; // Loop back to the first slide if at the last
         scaleSlides(newIndex);
         updateSlider();
-      }
-    
-      // Go to the previous slide
-      function prevSlide() {
+    }
+
+    function prevSlide() {
         const newIndex = (currentIndex - 1 + slides.length) % slides.length; // Loop back to the last slide if at the first
         scaleSlides(newIndex);
         updateSlider();
-      }
-    
-      // Add event listeners to the arrow buttons
-      if (nextArrow && prevArrow) {
+    }
+
+    if (nextArrow && prevArrow) {
         nextArrow.addEventListener('click', nextSlide);
         prevArrow.addEventListener('click', prevSlide);
-      }
-    
-      // Set up IntersectionObserver to scale slides when they are 50% in view
-      const observerOptions = {
-        root: null, // Observe in the viewport
+    }
+
+    // IntersectionObserver for triggering text animations and visibility
+    const observerOptions = {
+        root: null, // Observe within the viewport
         threshold: 0.5 // Trigger when 50% of the slide is in view
-      };
-    
-      function handleIntersection(entries) {
+    };
+
+    function resetAnimation(element) {
+        const animationName = window.getComputedStyle(element).animationName;
+
+        // Remove the animation
+        element.style.animation = 'none';
+
+        // Trigger reflow (restarts the animation timeline)
+        element.offsetHeight;
+
+        // Reapply the animation
+        element.style.animation = `${animationName} 1s ease`;
+    }
+
+    function handleIntersection(entries) {
         entries.forEach(entry => {
-          const slide = entry.target;
-          if (entry.isIntersecting) {
-            // Scale up the slide only after 50% of it is in view
-            if (entry.intersectionRatio >= 0.5) {
-              slide.style.transition = 'transform 0.5s ease';
-              slide.style.transform = 'scale(1)';
+            const slide = entry.target;
+            const texts = slide.querySelectorAll('.small-title, .p, .large-title, #canvas-1, #canvas-2, #canvas-3');
+
+            const largeText = slide.querySelector('.large-title'); // Target large text specifically
+            const paragraph = slide.querySelector('.p'); // Target paragraph specifically
+
+            if (entry.isIntersecting) {
+                // Restart animations and fade in elements when the slide is in view
+                texts.forEach(text => {
+                    setTimeout(() => {
+                        resetAnimation(text); // Reset and restart animation
+                        text.style.animationPlayState = 'running'; // Ensure the animation runs
+                        if (largeText) largeText.style.opacity = '1'; // Make the large text visible
+                        if (paragraph) paragraph.style.opacity = '1'; // Make the paragraph visible
+                    }, 0);
+                });
+            } else {
+                // Pause animations and hide the large text and paragraph when the slide exits the view
+                texts.forEach(text => {
+                    text.style.animationPlayState = 'paused';
+                });
+                if (largeText) {
+                    largeText.style.opacity = '0'; // Hide the large text
+                    largeText.style.transition = 'opacity 0.5s ease';
+                }
+                if (paragraph) {
+                    paragraph.style.opacity = '0'; // Hide the paragraph
+                    paragraph.style.transition = 'opacity 0.5s ease';
+                }
             }
-          } else {
-            // Scale down immediately when the slide is less than 50% in view (leaving)
-            slide.style.transition = 'transform 0.5s ease';
-            slide.style.transform = 'scale(0.7)';
-          }
         });
-      }
-    
-      const observer = new IntersectionObserver(handleIntersection, observerOptions);
-    
-      // Observe each slide
-      slides.forEach(slide => {
+    }
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+
+    slides.forEach(slide => {
         observer.observe(slide);
-      });
-    
-      // Initialize the slider on page load
-      // Set the first slide to be scaled up immediately when the page loads
-      const firstSlide = slides[currentIndex];
-      firstSlide.style.transition = 'transform 0.5s ease'; 
-      firstSlide.style.transform = 'scale(1)';  // Scale up the first slide
-      updateSlider();
+
+        // Pause animations initially and hide large text and paragraph
+        const texts = slide.querySelectorAll('.small-title, .p, .large-title, #canvas-1, #canvas-2, #canvas-3');
+        const largeText = slide.querySelector('.large-title');
+        const paragraph = slide.querySelector('.p');
+
+        texts.forEach(text => {
+            text.style.animationPlayState = 'paused';
+        });
+
+        if (largeText) {
+            largeText.style.opacity = '0';
+        }
+
+        if (paragraph) {
+            paragraph.style.opacity = '0';
+        }
+    });
+
+    // Initialize the slider on page load
+    const firstSlide = slides[currentIndex];
+    firstSlide.style.transition = 'transform 0.5s ease';
+    firstSlide.style.transform = 'scale(1)';
+    updateSlider();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const links = document.querySelectorAll('.link');
+
+  links.forEach(link => {
+      link.addEventListener('click', function (event) {
+          event.preventDefault(); // Prevent default navigation
+
+          const slide = link.closest('.slide');
+          const smallTitle = slide.querySelector('.small-title');
+          const largeTitle = slide.querySelector('.large-title');
+          const pContainer = slide.querySelector('.p-container');
+          const canvas = slide.querySelector('#canvas-1');
+          const arch = slide.querySelector('.arch');
+
+          smallTitle.classList.add('reset-animation');
+          largeTitle.classList.add('reset-animation');
+
+          smallTitle.classList.add('move-left');
+          largeTitle.classList.add('move-left');
+
+          // Add animation classes
+          smallTitle.classList.add('move-left');
+          largeTitle.classList.add('move-left');
+          pContainer.classList.add('move-right');
+          if (canvas) canvas.classList.add('move-right');
+          arch.style.transform = 'scale(1.2)';
+
+          void smallTitle.offsetWidth;
+          void largeTitle.offsetWidth;
+          smallTitle.classList.remove('reset-animation');
+          largeTitle.classList.remove('reset-animation');
+
+          // Navigate to the link's href after the animation completes
+          const href = link.getAttribute('href');
+          setTimeout(() => {
+              window.location.href = href;
+          }, 350); // Match this duration to your animation length
+      });
+  });
+});
+
+var choosePill;
+
+const move = function(pill){
+    const elements = document.querySelectorAll('.pill');
+
+    elements.forEach((element) => {
+        element.addEventListener("mousedown", function(){
+            element.style.position = "absolute";
+            choosePill = element;
+
+            document.onmousemove = function(e){
+                choosePill.style.left = e.clientX + 'px';
+                choosePill.style.top = e.clientY + 'px';
+                console.log(choosePill);
+            }
+        });
+    });
+    document.onmouseup = function(){
+       choosePill = null;
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const nextProject = document.querySelector('.self-image-container');
+    const topElement = document.querySelector('.image');
+    const bottomElement = document.querySelector('.i-strive-for-two');
+
+    const observerOptions = {
+        root: null, 
+        threshold: 0.5,  // Trigger when 50% of the element is visible
+    };
+
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                topElement.style.visibility = 'visible';
+                topElement.style.animation = 'opacity 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+                bottomElement.style.animation = 'm-animation 4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards';
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    if (nextProject) {
+        observer.observe(nextProject);
+    }
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const blurZone = document.createElement('div');
+    blurZone.classList.add('blur-zone');
+    document.body.appendChild(blurZone);
+
+    
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('blurred');
+                } else {
+                    entry.target.classList.remove('blurred');
+                }
+            });
+        },
+        {
+            root: null,
+            rootMargin: `-60px 0px 0px 0px`, // Match navbar height
+            threshold: [0],
+        }
+    );
+
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('container');
+    let isHorizontalScrollEnabled = false; // Track horizontal scroll state
+
+    // Enable horizontal scrolling
+    function enableHorizontalScrolling() {
+        document.body.style.overflowX = 'auto';
+        console.log('Horizontal scrolling enabled'); // Debug log
+        isHorizontalScrollEnabled = true;
+    }
+
+    // Disable horizontal scrolling
+    function disableHorizontalScrolling() {
+        document.body.style.overflowX = 'hidden';
+        console.log('Horizontal scrolling disabled'); // Debug log
+        isHorizontalScrollEnabled = false;
+    }
+
+    // Handle scroll events
+    container.addEventListener('scroll', () => {
+        const scrollLeft = container.scrollLeft;
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+        console.log(`ScrollLeft: ${scrollLeft}, MaxScrollLeft: ${maxScrollLeft}`); // Debug log
+
+        if (scrollLeft >= maxScrollLeft) {
+            container.style.overflowY = 'scroll'; // Enable vertical scrolling
+            console.log('Vertical scrolling enabled'); // Debug log
+        } else if (scrollLeft === 0) {
+            container.style.overflowY = 'hidden'; // Restrict vertical scrolling
+            disableHorizontalScrolling(); // Disable horizontal scrolling
+        }
+    });
+
+    // Handle upward wheel events
+    container.addEventListener('wheel', (event) => {
+        const scrollLeft = container.scrollLeft;
+        console.log(`Wheel event detected: deltaY=${event.deltaY}, scrollLeft=${scrollLeft}`); // Debug log
+
+        if (scrollLeft > 0 && event.deltaY < 0) {
+            enableHorizontalScrolling(); // Enable horizontal scrolling
+            container.scrollBy({
+                left: -30, // Move left
+                behavior: 'smooth',
+            });
+            event.preventDefault(); // Prevent default scrolling
+
+            // Check if we're at the beginning after scrolling
+            setTimeout(() => {
+                if (container.scrollLeft === 0) {
+                    disableHorizontalScrolling();
+                }
+            }, 300);
+        }
+    });
+
+    // Debugging helper: Initial state
+    console.log(`Initial ScrollLeft: ${container.scrollLeft}`);
+});
+
+
+
+
+
+
+
+
+
+
