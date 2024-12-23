@@ -19,7 +19,7 @@
     --h2-font-style: normal;
     --phone-body-font-family: "Afacad", serif;
     --phone-body-font-weight: 400;
-    --phone-body-font-size: 16px;
+    --phone-body-font-size: 0.7rem;
     --phone-body-letter-spacing: 0px;
     --phone-body-line-height: normal;
     --phone-body-font-style: normal;
@@ -37,7 +37,7 @@
     --phone-h2-font-style: normal;
     --phone-h4-bold-font-family:  "Abhaya Libre", serif;
     --phone-h4-bold-font-weight: 700;
-    --phone-h4-bold-font-size: 20px;
+    --phone-h4-bold-font-size: 1rem;
     --phone-h4-bold-letter-spacing: 0px;
     --phone-h4-bold-line-height: normal;
     --phone-h4-bold-font-style: normal;
@@ -122,3 +122,63 @@
     letter-spacing: var(--heading-letter-spacing);
     line-height: var(--heading-line-height);
 }
+
+@media (max-width: 992px) {
+    .h1 {
+        font-size: calc(var(--h1-font-size) - 3rem); /* Adjust h1 font for smaller desktops */
+    }
+    .h2 {
+        font-size: calc(var(--h2-font-size) - 1.5rem);
+    }
+    .h3 {
+        font-size: calc(var(--h3-font-size) - 0.3rem);
+    }
+    .body {
+        font-size: calc(var(--body-font-size) - 0.15rem);
+    }
+    .heading {
+        font-size: 14vw; /* Adjust heading for desktops */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .h1 {
+        font-size: calc(var(--h1-font-size) - 2rem); /* Adjust h1 font for tablet */
+    }
+    .h2 {
+        font-size: calc(var(--h2-font-size) - 0.5rem);
+    }
+    .h3 {
+        font-size: calc(var(--h3-font-size) - 1rem);
+    }
+    .body {
+        font-size: calc(var(--body-font-size) - 0.2rem);
+    }
+    .heading {
+        font-size: 16vw; /* Adjust heading for tablet */
+    }
+}
+
+
+@media (max-width: 576px) {
+    .h1 {
+        font-size: var(--phone-h1-font-size);
+    }
+    .h2 {
+        font-size: var(--phone-h2-font-size);
+    }
+    .h3 {
+        font-size: var(--phone-h3-font-size);
+    }
+    .body {
+        font-size: var(--phone-body-font-size);
+    }
+    .h4 {
+        font-size: var(--phone-h4-bold-font-size);
+    }
+    .heading {
+        font-size: 20vw; /* Adjust heading for mobile */
+    }
+}
+
